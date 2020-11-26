@@ -11,11 +11,13 @@
 
 .label {
     margin-left: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.nameInput {
-    margin-left: 10px;
-    margin-bottom: 20px;
+.input {
+    width: 50%;
+    margin: 5px 0px;
 }
 
 .addContanct {
