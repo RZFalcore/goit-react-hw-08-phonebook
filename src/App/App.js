@@ -37,6 +37,13 @@ export default class App extends Component {
       : alert(`${newContact.name} is already in contacts.`);
   };
 
+  handleDeleteContact = (id) => {
+    const { contacts } = this.state;
+    const filteredContacts = contacts.filter((contact) => contact.id !== id);
+    console.log(contacts, filteredContacts)
+    this.setState({ contacts: [...filteredContacts] });
+  };
+
   render() {
     const { contacts, filter } = this.state;
 
@@ -46,13 +53,12 @@ export default class App extends Component {
       <div className={styles.container}>
         <Title text="Phonebook">
           <AddForm
-            onChange={this.handleChange}
             onAddContact={this.handleAddContact}
           />
         </Title>
         <Title text="Contacts">
           <Filter filter={filter} onChange={this.handleChange} />
-          <Contacts contacts={filteredContacts} />
+          <Contacts contacts={filteredContacts} onDelete={ this.handleDeleteContact}/>
         </Title>
       </div>
     );
