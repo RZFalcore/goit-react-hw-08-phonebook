@@ -27,6 +27,7 @@ class AddForm extends Component {
     onAddContact(newPerson);
     this.setState({ name: "", number: "" });
   };
+
   render() {
     const { name, number } = this.state;
 

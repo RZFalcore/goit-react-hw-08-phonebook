@@ -22,14 +22,25 @@ export default class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleAddContact = contact => {
-    this.setState((state) => ({ contacts: [...state.contacts, contact] }));
-  }
+  handleAddContact = (newContact) => {
+    const { contacts } = this.state;
+
+    const existedContact = contacts.filter(
+      (contact) => contact.name === newContact.name
+    );
+
+    console.log(existedContact);
+    !existedContact[0]
+      ? this.setState((state) => ({
+          contacts: [...state.contacts, newContact],
+        }))
+      : alert(`${newContact.name} is already in contacts.`);
+  };
 
   render() {
-    const {contacts, filter } = this.state;
-   
-    const filteredContacts = contactsFilter(filter,   contacts);
+    const { contacts, filter } = this.state;
+
+    const filteredContacts = contactsFilter(filter, contacts);
 
     return (
       <div className={styles.container}>
