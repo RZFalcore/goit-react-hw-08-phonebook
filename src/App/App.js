@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 import Contacts from "../Contacts/Contacts";
+import Filter from "../Filter/Filter";
 import Title from "../Title/Title";
 import AddForm from "../AddForm/AddForm";
+
+import { contactsFilter } from "../utils/helpers";
 import styles from "../App/App.module.css";
-
-
-const numberFormater = number => {
-  if (number.length > 9) {return number.slice(0, -1)};
-  if (number.length === 3 || number.length === 6) { return number + "-" };
-  return number
-}
 export default class App extends Component {
   state = {
     contacts: [
@@ -20,41 +15,33 @@ export default class App extends Component {
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-    name: "",
-    number: "",
+    filter: "",
   };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { name, number } = this.state;
-    const newPerson = { id: uuidv4(), name, number };
-    
-    this.setState((state) => ({ contacts: [...state.contacts, newPerson] }));
-    this.setState({ name: "" });
-  };
+  handleAddContact = contact => {
+    this.setState((state) => ({ contacts: [...state.contacts, contact] }));
+  }
 
   render() {
-    const { name, contacts, number } = this.state;
+    const {contacts, filter } = this.state;
+   
+    const filteredContacts = contactsFilter(filter,   contacts);
 
-    const editedNumber = numberFormater(number);
-    
     return (
       <div className={styles.container}>
         <Title text="Phonebook">
           <AddForm
-            name={name}
-            number={editedNumber}
             onChange={this.handleChange}
-            onFormSubmit={this.handleFormSubmit}
+            onAddContact={this.handleAddContact}
           />
         </Title>
         <Title text="Contacts">
-          <Contacts contacts={contacts} />
+          <Filter filter={filter} onChange={this.handleChange} />
+          <Contacts contacts={filteredContacts} />
         </Title>
       </div>
     );
