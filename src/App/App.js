@@ -9,14 +9,19 @@ import { contactsFilter } from "../utils/helpers";
 import styles from "../App/App.module.css";
 export default class App extends Component {
   state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
+    contacts: [],
     filter: "",
   };
+
+  componentDidMount() {
+    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (savedContacts ) this.setState({contacts: savedContacts})
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) localStorage.setItem("contacts", JSON.stringify(contacts))
+  }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -29,7 +34,6 @@ export default class App extends Component {
       (contact) => contact.name === newContact.name
     );
 
-    console.log(existedContact);
     !existedContact[0]
       ? this.setState((state) => ({
           contacts: [...state.contacts, newContact],
@@ -40,7 +44,7 @@ export default class App extends Component {
   handleDeleteContact = (id) => {
     const { contacts } = this.state;
     const filteredContacts = contacts.filter((contact) => contact.id !== id);
-    console.log(contacts, filteredContacts)
+    console.log(contacts, filteredContacts);
     this.setState({ contacts: [...filteredContacts] });
   };
 
@@ -52,13 +56,14 @@ export default class App extends Component {
     return (
       <div className={styles.container}>
         <Title text="Phonebook">
-          <AddForm
-            onAddContact={this.handleAddContact}
-          />
+          <AddForm onAddContact={this.handleAddContact} />
         </Title>
         <Title text="Contacts">
           <Filter filter={filter} onChange={this.handleChange} />
-          <Contacts contacts={filteredContacts} onDelete={ this.handleDeleteContact}/>
+          <Contacts
+            contacts={filteredContacts}
+            onDelete={this.handleDeleteContact}
+          />
         </Title>
       </div>
     );
