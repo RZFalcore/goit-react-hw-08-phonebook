@@ -7,6 +7,11 @@ import AddForm from "../AddForm/AddForm";
 
 import { contactsFilter } from "../utils/helpers";
 import styles from "../App/App.module.css";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 export default class App extends Component {
   state = {
     contacts: [],
@@ -17,7 +22,7 @@ export default class App extends Component {
   componentDidMount() {
     const savedContacts = JSON.parse(localStorage.getItem("contacts"));
     if (savedContacts) this.setState({ contacts: savedContacts });
-    this.setState({  animate: true  });
+    this.setState({ animate: true });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,7 +46,10 @@ export default class App extends Component {
       ? this.setState((state) => ({
           contacts: [...state.contacts, newContact],
         }))
-      : alert(`${newContact.name} is already in contacts.`);
+      : toast.error(`${newContact.name} is already in contacts!`, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 5000,
+        });
   };
 
   handleDeleteContact = (id) => {
@@ -62,11 +70,13 @@ export default class App extends Component {
         </Title>
         <Title text="Contacts">
           <Filter filter={filter} onChange={this.handleChange} />
-          {filteredContacts.length > 0 && <Contacts
-            animate={animate}
-            contacts={filteredContacts}
-            onDelete={this.handleDeleteContact}
-          />}
+          {filteredContacts.length > 0 && (
+            <Contacts
+              animate={animate}
+              contacts={filteredContacts}
+              onDelete={this.handleDeleteContact}
+            />
+          )}
         </Title>
       </div>
     );

@@ -1,6 +1,6 @@
 .contact {
     height: 30px;
-    width: 240px;
+    width: 300px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,9 @@
 .infoContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid grey;
+    width: 76%;
 }
 
 .label {
