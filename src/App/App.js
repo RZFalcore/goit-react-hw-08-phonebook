@@ -11,16 +11,19 @@ export default class App extends Component {
   state = {
     contacts: [],
     filter: "",
+    animate: false,
   };
 
   componentDidMount() {
     const savedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (savedContacts ) this.setState({contacts: savedContacts})
+    if (savedContacts) this.setState({ contacts: savedContacts });
+    this.setState({  animate: true  });
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
     const { contacts } = this.state;
-    if (prevState.contacts !== contacts) localStorage.setItem("contacts", JSON.stringify(contacts))
+    if (prevState.contacts !== contacts)
+      localStorage.setItem("contacts", JSON.stringify(contacts));
   }
 
   handleChange = (e) => {
@@ -49,7 +52,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter, animate } = this.state;
 
     const filteredContacts = contactsFilter(filter, contacts);
 
@@ -60,10 +63,11 @@ export default class App extends Component {
         </Title>
         <Title text="Contacts">
           <Filter filter={filter} onChange={this.handleChange} />
-          <Contacts
+          {filteredContacts.length > 0 && <Contacts
+            animate={animate}
             contacts={filteredContacts}
             onDelete={this.handleDeleteContact}
-          />
+          />}
         </Title>
       </div>
     );
