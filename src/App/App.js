@@ -47,7 +47,6 @@ export default class App extends Component {
   handleDeleteContact = (id) => {
     const { contacts } = this.state;
     const filteredContacts = contacts.filter((contact) => contact.id !== id);
-    console.log(contacts, filteredContacts);
     this.setState({ contacts: [...filteredContacts] });
   };
 

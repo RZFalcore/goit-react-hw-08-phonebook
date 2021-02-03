@@ -1,9 +1,6 @@
 .form {
-    background-color: rgb(241, 240, 240);
-    outline: 1px solid black;
     width: 50%;
     margin: 0px;
-    padding: 20px 0px 0px 0px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -21,6 +18,18 @@
 }
 
 .addContanct {
-    margin: 10px 10px;
-    width: 30%;
+    margin: 10px;
+    width: 52%;
+    border: 0px;
+    background-color: blue;
+    color: white;
+    border-radius: 4px;
+    height: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    }
+
+    .addContanct:hover,
+    .addContanct:focus {
+        background-color: rgb(54, 54, 167);
 }
