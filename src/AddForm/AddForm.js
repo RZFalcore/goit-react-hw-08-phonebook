@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { addContact } from "../redux/contactsActions";
 import { numberFormater } from "../utils/helpers";
 import styles from "./AddForm.module.css";
+
+
+toast.configure();
 
 class AddForm extends Component {
   state = { name: "", number: "" };
@@ -22,28 +27,21 @@ class AddForm extends Component {
     e.preventDefault();
 
     const { name, number } = this.state;
-    const { onAddContact } = this.props;
+    const { onAddContact, contacts } = this.props;
+    
+    const isContactExist = contacts.find(contact => contact.name.toLowerCase() === name.trim().toLowerCase())
 
-    const newPerson = { id: uuidv4(), name, number };
-
-    onAddContact(newPerson);
-    this.setState({ name: "", number: "" });
+    if (isContactExist === undefined) {
+      const newPerson = { id: uuidv4(), name: name.trim(), number };
+      onAddContact(newPerson);
+      this.setState({ name: "", number: "" });
+    } else {
+      return toast.error(`${name} is already in contacts!`, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+      });      
+    }
   };
-
-  // nameValidation = () => {
-  //   const existedContact = contacts.filter(
-  //     (contact) => contact.name === newContact.name
-  //   );
-
-  //   !existedContact[0]
-  //     ? this.setState((state) => ({
-  //         contacts: [...state.contacts, newContact],
-  //       }))
-  //     : toast.error(`${newContact.name} is already in contacts!`, {
-  //         position: toast.POSITION.BOTTOM_RIGHT,
-  //         autoClose: 5000,
-  //       });
-  // }
 
   render() {
     const { name, number } = this.state;
@@ -78,9 +76,14 @@ class AddForm extends Component {
   }
 };
 
+const mapStateToProps = ({ contacts }) => ({
+  contacts: contacts.items,
+});
+
+
 const mapDispatchToProps = {
   onAddContact: addContact,
 };
 
 
-export default connect(null, mapDispatchToProps)(AddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);

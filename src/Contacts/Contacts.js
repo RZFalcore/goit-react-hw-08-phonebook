@@ -27,7 +27,7 @@ const Contacts = ({ contacts, animate }) => (
 
 Contacts.propTypes = {
   contacts: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  animate: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ contacts }) => {
