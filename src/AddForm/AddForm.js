@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
+import { addContact } from "../redux/contactsActions";
 import { numberFormater } from "../utils/helpers";
 import styles from "./AddForm.module.css";
 
@@ -36,7 +38,7 @@ class AddForm extends Component {
     return (
       <form className={styles.form} onSubmit={this.handleFormSubmit}>
         <label className={styles.label} htmlFor="name">
-          Name:
+          Name
           <input
             className={styles.input}
             type="text"
@@ -46,7 +48,7 @@ class AddForm extends Component {
           />
         </label>
         <label className={styles.label} htmlFor="number">
-          Number:
+          Number
           <input
             className={styles.input}
             type="text"
@@ -61,4 +63,9 @@ class AddForm extends Component {
   }
 };
 
-export default AddForm;
+const mapDispatchToProps = {
+  onAddContact: addContact,
+};
+
+
+export default connect(null, mapDispatchToProps)(AddForm);
