@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { removeContact } from "../redux/contactsActions";
 
 import styles from "./Contact.module.css";
 
@@ -24,4 +26,14 @@ Contact.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default Contact;
+const mapStateToProps = (state, ownProps) => ({
+  contact: state.contacts.items.filter((item) => item.id === ownProps.id),
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onDelete: () => dispatch(removeContact(ownProps.id)),
+});
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Contact);

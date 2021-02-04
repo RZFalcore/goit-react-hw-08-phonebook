@@ -1,27 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
+import Contact from "../Contact/Contact";
+
 import styles from "./Contacts.module.css";
 import quickSlide from "../transitions/quickSlide.module.css";
 
-import Contact from "../Contact/Contact";
-
-const Contacts = ({ contacts, onDelete, animate }) => (
+const Contacts = ({ contacts, animate }) => (
   <>
     <TransitionGroup component="ul" className={styles.contactsList}>
-      {contacts.map((contact) => (
+      {contacts.map(({ id }) => (
         <CSSTransition
-          key={contact.id}
+          key={id}
           in={animate}
           timeout={250}
           classNames={quickSlide}
           unmountOnExit
         >
-          <Contact
-            contact={contact}
-            key={contact.id}
-            onDelete={() => onDelete(contact.id)}
-          />
+          <Contact key={id} id={id} />
         </CSSTransition>
       ))}
     </TransitionGroup>
@@ -33,4 +30,8 @@ Contacts.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default Contacts;
+const mapStateToProps = (state) => ({
+  contacts: state.contacts.items,
+});
+
+export default connect(mapStateToProps)(Contacts);
