@@ -15,7 +15,7 @@ const itemsReducer = (state = [], { type, payload }) => {
 const filterReducer = (state = "", { type, payload }) => {
   switch (type) {
     case Type.FILTER_CONTACTS:
-      return (state = payload);
+      return payload;
     default:
       return state;
   }

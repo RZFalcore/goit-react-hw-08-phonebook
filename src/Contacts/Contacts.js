@@ -30,8 +30,12 @@ Contacts.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts.items,
-});
+const mapStateToProps = ({ contacts }) => {
+  const normalizedFilter = contacts.filter.toLowerCase();
+  const filteredContacts = contacts.items.filter(({ name }) =>
+    name.toLowerCase().includes(normalizedFilter)
+  );
+  return { contacts: filteredContacts };
+};
 
 export default connect(mapStateToProps)(Contacts);

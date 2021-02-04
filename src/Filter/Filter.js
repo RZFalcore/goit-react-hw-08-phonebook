@@ -1,10 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { filterContacts } from "../redux/contactsActions";
 
 const Filter = ({ filter, onChange }) => (
   <>
     <p>Find contacts by name</p>
-    <input type="text" name="filter" value={filter} onChange={onChange} />
+    <input
+      type="text"
+      name="filter"
+      value={filter}
+      onChange={(e) => onChange(e.target.value)}
+    />
   </>
 );
 
@@ -13,4 +20,13 @@ Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default Filter;
+const mapStateToProps = (state) => ({
+  filter: state.contacts.filter,
+});
+
+const mapDispatchToProps = {
+  onChange: filterContacts,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
