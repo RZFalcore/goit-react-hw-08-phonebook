@@ -12,7 +12,7 @@ const Contact = ({ id, name, number, onDelete }) => (
       <label>{number}</label>
     </div>
     <button className={styles.button} onClick={onDelete}>
-      Delete
+      Del
     </button>
   </li>
 );
