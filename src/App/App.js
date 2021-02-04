@@ -14,69 +14,27 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 export default class App extends Component {
   state = {
-    contacts: [],
-    filter: "",
     animate: false,
   };
 
   componentDidMount() {
-    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (savedContacts) this.setState({ contacts: savedContacts });
     this.setState({ animate: true });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { contacts } = this.state;
-    if (prevState.contacts !== contacts)
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-  }
-
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleAddContact = (newContact) => {
-    const { contacts } = this.state;
-
-    const existedContact = contacts.filter(
-      (contact) => contact.name === newContact.name
-    );
-
-    !existedContact[0]
-      ? this.setState((state) => ({
-          contacts: [...state.contacts, newContact],
-        }))
-      : toast.error(`${newContact.name} is already in contacts!`, {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 5000,
-        });
-  };
-
-  handleDeleteContact = (id) => {
-    const { contacts } = this.state;
-    const filteredContacts = contacts.filter((contact) => contact.id !== id);
-    this.setState({ contacts: [...filteredContacts] });
-  };
-
   render() {
-    const { contacts, filter, animate } = this.state;
-
-    const filteredContacts = contactsFilter(filter, contacts);
-
+    const { animate } = this.state;
     return (
       <div className={styles.container}>
         <Title text="Phonebook">
-          <AddForm onAddContact={this.handleAddContact} />
+          <AddForm />
         </Title>
         <Title text="Contacts">
-          <Filter filter={filter} onChange={this.handleChange} />
-          {filteredContacts.length > 0 && (
+          <Filter />
             <Contacts
               animate={animate}
               contacts={filteredContacts}
               onDelete={this.handleDeleteContact}
             />
-          )}
         </Title>
       </div>
     );

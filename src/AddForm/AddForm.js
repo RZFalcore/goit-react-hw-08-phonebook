@@ -30,6 +30,21 @@ class AddForm extends Component {
     this.setState({ name: "", number: "" });
   };
 
+  // nameValidation = () => {
+  //   const existedContact = contacts.filter(
+  //     (contact) => contact.name === newContact.name
+  //   );
+
+  //   !existedContact[0]
+  //     ? this.setState((state) => ({
+  //         contacts: [...state.contacts, newContact],
+  //       }))
+  //     : toast.error(`${newContact.name} is already in contacts!`, {
+  //         position: toast.POSITION.BOTTOM_RIGHT,
+  //         autoClose: 5000,
+  //       });
+  // }
+
   render() {
     const { name, number } = this.state;
 
