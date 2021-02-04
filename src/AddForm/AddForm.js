@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { addContact } from "../redux/contactsActions";
+import { addContactAction } from "../redux/contactsActions";
 import { numberFormater } from "../utils/helpers";
 import styles from "./AddForm.module.css";
 
@@ -82,7 +82,7 @@ const mapStateToProps = ({ contacts }) => ({
 
 
 const mapDispatchToProps = {
-  onAddContact: addContact,
+  onAddContact: addContactAction,
 };
 
 

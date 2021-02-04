@@ -1,7 +1,0 @@
-const Type = {
-  ADD_CONTACT: "ADD_CONTACT",
-  REMOVE_CONTACT: "REMOVE_CONTACT",
-  FILTER_CONTACTS: "FILTER_CONTACTS",
-};
-
-export default Type;

@@ -1,24 +1,23 @@
 import { combineReducers } from "redux";
-import Type from "./contactsActionTypes";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  addContactAction,
+  removeContactAction,
+  filterContactAction,
+} from "./contactsActions";
 
-const itemsReducer = (state = [], { type, payload }) => {
-  switch (type) {
-    case Type.ADD_CONTACT:
-      return [...state, payload];
-    case Type.REMOVE_CONTACT:
-      return state.filter((contact) => contact.id !== payload.id);
-    default:
-      return state;
-  }
-};
+const addContact = (state, { payload }) => [...state, payload];
+const removeContact = (state, { payload }) =>
+  state.filter((item) => item.id !== payload);
+const filterContacts = (state, { payload }) => payload;
 
-const filterReducer = (state = "", { type, payload }) => {
-  switch (type) {
-    case Type.FILTER_CONTACTS:
-      return payload;
-    default:
-      return state;
-  }
-};
+const items = createReducer([], {
+  [addContactAction]: addContact,
+  [removeContactAction]: removeContact,
+});
 
-export default combineReducers({ items: itemsReducer, filter: filterReducer });
+const filter = createReducer("", {
+  [filterContactAction]: filterContacts,
+});
+
+export default combineReducers({ items, filter });
