@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { filterContactAction } from "../redux/contactsActions";
+import contactsActions from "../redux/contactsActions";
 
 const Filter = ({ filter, onChange }) => (
   <>
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onChange: filterContactAction,
+  onChange: contactsActions.filterContactAction,
 };
 
 

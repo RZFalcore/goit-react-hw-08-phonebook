@@ -15,7 +15,7 @@ const items = createReducer([], {
 });
 
 const filter = createReducer("", {
-  [filterContactAction]: filterContacts,
+  [contactsActions.filterContactAction]: filterContacts,
 });
 
 export default combineReducers({ items, filter });
