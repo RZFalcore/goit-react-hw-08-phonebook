@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 import Contact from "../Contact/Contact";
+import contactsSelectors from "../redux/contactsSelectors";
 
 import styles from "./Contacts.module.css";
 import quickSlide from "../transitions/quickSlide.module.css";
@@ -30,12 +31,8 @@ Contacts.propTypes = {
   animate: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ contacts }) => {
-  const normalizedFilter = contacts.filter.toLowerCase();
-  const filteredContacts = contacts.items.filter(({ name }) =>
-    name.toLowerCase().includes(normalizedFilter)
-  );
-  return { contacts: filteredContacts };
-};
+const mapStateToProps = (state) => ({
+  contacts: contactsSelectors.getFilteredContacts(state),
+});
 
 export default connect(mapStateToProps)(Contacts);

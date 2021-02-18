@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { addContactOperation } from "../redux/contactsOperations";
+import contactsSelectors from "../redux/contactsSelectors";
 import { numberFormater } from "../utils/helpers";
 import styles from "./AddForm.module.css";
 
@@ -76,8 +77,8 @@ class AddForm extends Component {
   }
 };
 
-const mapStateToProps = ({ contacts }) => ({
-  contacts: contacts.items,
+const mapStateToProps = (state) => ({
+  contacts: contactsSelectors.getContacts(state),
 });
 
 
