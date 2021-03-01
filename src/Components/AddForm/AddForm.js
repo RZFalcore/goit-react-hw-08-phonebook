@@ -5,11 +5,10 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { addContactOperation } from "../redux/contactsOperations";
-import contactsSelectors from "../redux/contactsSelectors";
-import { numberFormater } from "../utils/helpers";
+import { addContactOperation } from "../../redux/contactsOperations";
+import contactsSelectors from "../../redux/contactsSelectors";
+import { numberFormater } from "../../utils/helpers";
 import styles from "./AddForm.module.css";
-
 
 toast.configure();
 
@@ -29,8 +28,10 @@ class AddForm extends Component {
 
     const { name, number } = this.state;
     const { onAddContact, contacts } = this.props;
-    
-    const isContactExist = contacts.find(contact => contact.name.toLowerCase() === name.trim().toLowerCase())
+
+    const isContactExist = contacts.find(
+      (contact) => contact.name.toLowerCase() === name.trim().toLowerCase()
+    );
 
     if (isContactExist === undefined) {
       const newPerson = { id: uuidv4(), name: name.trim(), number };
@@ -40,7 +41,7 @@ class AddForm extends Component {
       return toast.error(`${name} is already in contacts!`, {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 5000,
-      });      
+      });
     }
   };
 
@@ -75,16 +76,14 @@ class AddForm extends Component {
       </form>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => ({
   contacts: contactsSelectors.getContacts(state),
 });
 
-
 const mapDispatchToProps = {
   onAddContact: addContactOperation,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddForm);

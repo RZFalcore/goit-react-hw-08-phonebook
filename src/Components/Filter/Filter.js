@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import contactsActions from "../redux/contactsActions";
-import contactsSelectors from "../redux/contactsSelectors";
+import contactsActions from "../../redux/contactsActions";
+import contactsSelectors from "../../redux/contactsSelectors";
 
 const Filter = ({ filter, onChange }) => (
   <>
@@ -28,6 +28,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   onChange: contactsActions.filterContactAction,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

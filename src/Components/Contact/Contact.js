@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { removeContactOperation } from "../redux/contactsOperations";
-import contactsSelectors from "../redux/contactsSelectors";
+import { removeContactOperation } from "../../redux/contactsOperations";
+import contactsSelectors from "../../redux/contactsSelectors";
 
 import styles from "./Contact.module.css";
 

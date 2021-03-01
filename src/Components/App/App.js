@@ -5,7 +5,7 @@ import Contacts from "../Contacts/Contacts";
 import Filter from "../Filter/Filter";
 import Title from "../Title/Title";
 import AddForm from "../AddForm/AddForm";
-import { fetchContactsOperation } from "../redux/contactsOperations";
+import { fetchContactsOperation } from "../../redux/contactsOperations";
 import styles from "../App/App.module.css";
 
 class App extends Component {

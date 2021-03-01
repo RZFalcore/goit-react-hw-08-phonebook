@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "./Title.module.css";
-import slide from "../transitions/slide.module.css";
+import slide from "../../transitions/slide.module.css";
 
 class Title extends Component {
   state = { animate: false };
-  
+
   componentDidMount() {
     this.setState({ animate: true });
   }
 
   render() {
     const { animate } = this.state;
-    const {  text , children } = this.props;
+    const { text, children } = this.props;
     return (
       <>
-        <CSSTransition 
+        <CSSTransition
           in={animate}
           timeout={500}
           classNames={slide}

@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 import Contact from "../Contact/Contact";
-import contactsSelectors from "../redux/contactsSelectors";
+import contactsSelectors from "../../redux/contactsSelectors";
 
 import styles from "./Contacts.module.css";
-import quickSlide from "../transitions/quickSlide.module.css";
+import quickSlide from "../../transitions/quickSlide.module.css";
 
 const Contacts = ({ contacts, animate }) => (
   <>
