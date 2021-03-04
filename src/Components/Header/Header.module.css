@@ -1,0 +1,14 @@
+.link {
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.link:hover,
+:focus {
+    color: blueviolet;
+}
+
+.activeLink {
+    color: blue
+}

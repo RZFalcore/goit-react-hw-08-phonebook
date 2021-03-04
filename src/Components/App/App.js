@@ -1,45 +1,20 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import Contacts from "../Contacts/Contacts";
-import Filter from "../Filter/Filter";
-import Title from "../Title/Title";
-import AddForm from "../AddForm/AddForm";
-import { fetchContactsOperation } from "../../redux/contactsOperations";
-import styles from "../App/App.module.css";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Header from "../Header/Header";
+import ContactsPage from "../../Pages/ContactsPage/ContactsPage";
+import LoginPage from "../../Pages/LoginPage/LoginPage";
+import RegistationPage from "../../Pages/RegistrationPage/RegistationPage";
 
-class App extends Component {
-  static propTypes = {
-    fetchContacts: PropTypes.func.isRequired,
-  };
+const App = () => (
+  <>
+    <Header />
+    
+    <Switch>
+      <Route exact path="/contacts" component={ContactsPage} />
+      <Route path="/registration" component={RegistationPage} />
+      <Route path="/login" component={LoginPage} />
+    </Switch>
+  </>
+);
 
-  state = {
-    animate: false,
-  };
-
-  componentDidMount() {
-    this.props.fetchContacts();
-    this.setState({ animate: true });
-  }
-
-  render() {
-    const { animate } = this.state;
-    return (
-      <div className={styles.container}>
-        <Title text="Phonebook">
-          <AddForm />
-        </Title>
-        <Title text="Contacts">
-          <Filter />
-          <Contacts animate={animate} />
-        </Title>
-      </div>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  fetchContacts: fetchContactsOperation,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
