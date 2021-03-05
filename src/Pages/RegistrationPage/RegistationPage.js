@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-
-const initialState = { name: "", email: "", password: "" };
-
+import { authOperations } from "../../redux/auth";
 class RegistationPage extends Component {
-  state = initialState;
+  state = { name: "", email: "", password: "" };
 
-  handleInputChange = ({ target }) => {
-    const { value, name } = target;
+  handleInputChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    this.setState(initialState);
+    this.setState({ name: "", email: "", password: "" });
   };
 
   render() {
