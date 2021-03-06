@@ -36,4 +36,17 @@ const login = (credentials) => (dispatch) => {
     .catch((err) => dispatch(authActions.loginError(err)));
 };
 
-export default { registration, login };
+const logout = () => (dispatch) => {
+  dispatch(authActions.logoutRequest());
+
+  axios
+    .post("/users/logout")
+    .then((res) => {
+      console.log(res);
+      token.unset(res.data.token);
+      dispatch(authActions.logoutSuccess());
+    })
+    .catch((err) => dispatch(authActions.logoutError(err)));
+};
+
+export default { registration, login, logout };
