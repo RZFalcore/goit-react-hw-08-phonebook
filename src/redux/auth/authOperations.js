@@ -24,4 +24,16 @@ const registration = (credentials) => (dispatch) => {
     .catch((err) => dispatch(authActions.registerError(err)));
 };
 
-export default { registration };
+const login = (credentials) => (dispatch) => {
+  dispatch(authActions.loginRequest());
+
+  axios
+    .post("/users/login", credentials)
+    .then((res) => {
+      token.set(res.data.token);
+      dispatch(authActions.loginSuccess(res.data));
+    })
+    .catch((err) => dispatch(authActions.loginError(err)));
+};
+
+export default { registration, login };
