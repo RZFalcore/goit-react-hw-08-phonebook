@@ -43,7 +43,7 @@ const logout = () => (dispatch) => {
     .post("/users/logout")
     .then((res) => {
       console.log(res);
-      token.unset(res.data.token);
+      token.unset();
       dispatch(authActions.logoutSuccess());
     })
     .catch((err) => dispatch(authActions.logoutError(err)));
