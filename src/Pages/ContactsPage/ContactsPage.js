@@ -5,7 +5,7 @@ import Contacts from "../../Components/Contacts/Contacts";
 import Filter from "../../Components/Filter/Filter";
 import Title from "../../Components/Title/Title";
 import AddForm from "../../Components/AddForm/AddForm";
-import { fetchContactsOperation } from "../../redux/contactsOperations";
+import { contactsOperations } from "../../redux/contacts";
 import styles from "./ContactsPage.module.css";
 
 class HomePage extends Component {
@@ -39,7 +39,7 @@ class HomePage extends Component {
 }
 
 const mapDispatchToProps = {
-  fetchContacts: fetchContactsOperation,
+  fetchContacts: contactsOperations.fetchContactsOperation,
 };
 
 export default connect(null, mapDispatchToProps)(HomePage);

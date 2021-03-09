@@ -19,10 +19,9 @@ const getContactById = createSelector(
   }
 );
 
-const contactsSelectors = {
+export default {
   getContacts,
   getFilter,
   getFilteredContacts,
   getContactById,
 };
-export default contactsSelectors;

@@ -1,17 +1,28 @@
 import axios from "axios";
 import contactsActions from "./contactsActions";
+import { authOperations } from "../auth/";
 
 // axios.defaults.baseURL = "http://localhost:3001";
 
-export const fetchContactsOperation = () => (dispatch) => {
+const fetchContactsOperation = () => (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) {
+    return;
+  }
+
+  authOperations.token.set(persistedToken);
   dispatch(contactsActions.fetchContactsRequest());
+
   axios
     .get("/contacts")
     .then((res) => dispatch(contactsActions.fetchContactsSuccess(res.data)))
     .catch((err) => dispatch(contactsActions.addContactError(err)));
 };
 
-export const addContactOperation = (contact) => (dispatch) => {
+const addContactOperation = (contact) => (dispatch) => {
   contactsActions.addContactRequest();
   axios
     .post("/contacts", contact)
@@ -19,10 +30,16 @@ export const addContactOperation = (contact) => (dispatch) => {
     .catch((err) => dispatch(contactsActions.addContactError(err)));
 };
 
-export const removeContactOperation = (id) => (dispatch) => {
+const removeContactOperation = (id) => (dispatch) => {
   contactsActions.removeContactRequest();
   axios
     .delete(`/contacts/${id}`)
     .then((res) => dispatch(contactsActions.removeContactSuccess(id)))
     .catch((err) => dispatch(contactsActions.removeContactError(err)));
+};
+
+export default {
+  fetchContactsOperation,
+  addContactOperation,
+  removeContactOperation,
 };

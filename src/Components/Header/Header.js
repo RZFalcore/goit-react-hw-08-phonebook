@@ -5,7 +5,7 @@ import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Header.module.css";
 import { authSelectors } from "../../redux/auth";
 
-const Header = ({ isAuthenticated }) => (
+const Header = ({ isAuthenticated, isDataLoaded }) => (
   <div style={{ display: "flex", justifyContent: "space-between" }}>
     <ul>
       <NavLink
@@ -30,12 +30,13 @@ const Header = ({ isAuthenticated }) => (
         Log In
       </NavLink>
     </ul>
-    {isAuthenticated && <UserMenu />}
+    {isAuthenticated &&  isDataLoaded  && <UserMenu />}
   </div>
 );
 
 const mapStateToProps = (state) => ({
   isAuthenticated: authSelectors.userAuthenticatedSelector(state),
+  isDataLoaded: authSelectors.userNameSelector(state),
 });
 
 export default connect(mapStateToProps)(Header);

@@ -67,4 +67,4 @@ const getCurrentUser = () => (dispatch, getState) => {
     .catch((err) => dispatch(authActions.getCurrentUserError(err)));
 };
 
-export default { registration, login, logout, getCurrentUser };
+export default { registration, login, logout, getCurrentUser, token };

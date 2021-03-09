@@ -14,17 +14,15 @@ const removeContactError = createAction("contacts/removeContactError");
 
 const filterContactAction = createAction("contacts/filter");
 
-const contactsActions = {
-    fetchContactsRequest,
-    fetchContactsSuccess,
-    fetchContactsError,
-    addContactRequest,
-    addContactSuccess,
-    addContactError,
-    removeContactRequest,
-    removeContactSuccess,
-    removeContactError,
-    filterContactAction,
-  }
-
-export default contactsActions;
+export default {
+  fetchContactsRequest,
+  fetchContactsSuccess,
+  fetchContactsError,
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+  removeContactRequest,
+  removeContactSuccess,
+  removeContactError,
+  filterContactAction,
+};

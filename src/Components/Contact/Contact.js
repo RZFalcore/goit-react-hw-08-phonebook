@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { removeContactOperation } from "../../redux/contactsOperations";
-import contactsSelectors from "../../redux/contactsSelectors";
+import { contactsOperations, contactsSelectors } from "../../redux/contacts/";
 
 import styles from "./Contact.module.css";
 
@@ -31,7 +30,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onDelete: () => dispatch(removeContactOperation(ownProps.id)),
+  onDelete: () =>
+    dispatch(contactsOperations.removeContactOperation(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contact);

@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import contactsReducer from "./contactsReducers";
+import contactsReducer from "./contacts/contactsReducers";
 import authReducer from "./auth/authReducers";
 
 const authPersistConfig = {
