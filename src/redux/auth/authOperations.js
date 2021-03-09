@@ -49,4 +49,22 @@ const logout = () => (dispatch) => {
     .catch((err) => dispatch(authActions.logoutError(err)));
 };
 
-export default { registration, login, logout };
+const getCurrentUser = () => (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) {
+    return;
+  }
+
+  token.set(persistedToken);
+  dispatch(authActions.getCurrentUserRequest());
+
+  axios
+    .get("/users/current")
+    .then((res) => dispatch(authActions.getCurrentUserSuccess(res.data)))
+    .catch((err) => dispatch(authActions.getCurrentUserError(err)));
+};
+
+export default { registration, login, logout, getCurrentUser };
