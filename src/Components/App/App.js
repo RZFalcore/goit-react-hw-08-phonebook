@@ -27,11 +27,7 @@ class App extends Component {
               route.private ? (
                 <PrivateRoute key={route.label} {...route} />
               ) : (
-                <PublicRoute
-                  key={route.label}
-                  {...route}
-                  restricted={route.restricted}
-                />
+                <PublicRoute key={route.label} {...route} />
               )
             )}
           </Switch>

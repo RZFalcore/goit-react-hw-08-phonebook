@@ -1,18 +1,16 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { authSelectors } from "../../redux/auth";
+import withAuth from "../HOC/withAuth";
 
 const PublicRoute = ({
   component: Component,
   isAuthenticated,
-  restricted,
   ...routeProps
 }) => (
   <Route
     {...routeProps}
     render={(props) =>
-      isAuthenticated && restricted ? (
+      isAuthenticated && props.restricted ? (
         <Redirect to="/contacts" />
       ) : (
         <Component {...props} />
@@ -21,8 +19,4 @@ const PublicRoute = ({
   />
 );
 
-const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: authSelectors.userAuthenticatedSelector(state),
-});
-
-export default connect(mapStateToProps)(PublicRoute);
+export default withAuth(PublicRoute);

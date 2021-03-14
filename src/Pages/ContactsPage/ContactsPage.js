@@ -19,20 +19,9 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    // if (!this.props.isAuthenticated) {
-    //   this.props.history.replace("/login");
-    //   return;
-    // }
     this.props.fetchContacts();
     this.setState({ animate: true });
   }
-
-  // componentDidUpdate() {
-  //   if (!this.props.isAuthenticated) {
-  //     this.props.history.replace("/login");
-  //     return;
-  //   }
-  // }
 
   render() {
     const { animate } = this.state;

@@ -5,17 +5,17 @@ import { authOperations, authSelectors } from "../../redux/auth";
 class LoginPage extends Component {
   state = { email: "", password: "" };
 
-  // componentDidMount() {
-  //   if (this.props.isAuthenticated) {
-  //     this.props.history.replace("/contacts");
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.replace("/contacts");
+    }
+  }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.props.isAuthenticated) {
-  //     this.props.history.replace("/contacts");
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isAuthenticated) {
+      this.props.history.replace("/contacts");
+    }
+  }
 
   handleInputChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
