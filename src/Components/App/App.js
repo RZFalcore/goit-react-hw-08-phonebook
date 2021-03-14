@@ -2,12 +2,14 @@ import React, { Component, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
+import ContactsPage from "../../Pages/ContactsPage/ContactsPage";
+import LoginPage from "../../Pages/LoginPage/LoginPage";
+import RegistationPage from "../../Pages/RegistrationPage/RegistationPage";
 import Header from "../Header/Header";
 import { authOperations } from "../../redux/auth";
-import routes from "../../routes";
-// import ContactsPage from "../../Pages/ContactsPage/ContactsPage";
-// import LoginPage from "../../Pages/LoginPage/LoginPage";
-// import RegistationPage from "../../Pages/RegistrationPage/RegistationPage";
+import PublicRoute from "../PublicRoute/PublicRoute";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+// import routes from "../../routes";
 
 class App extends Component {
   componentDidMount() {
@@ -21,13 +23,18 @@ class App extends Component {
           <Header />
 
           <Switch>
-            {routes.map((route) => (
-              <Route key={route.path} {...route} />
-            ))}
+            <PublicRoute path="/login" exact component={LoginPage} restricted={true}/>
+            <PublicRoute path="/registration" exact component={RegistationPage} restricted={true} />
             
-            {/* <Route exact path="/contacts" component={ContactsPage} />
+            {/* <PrivateRoute path="/contacts" extact component={ContactsPage} />
+            <Route exact path="/contacts" component={ContactsPage} />
             <Route path="/registration" component={RegistationPage} />
             <Route path="/login" component={LoginPage} />  */}
+            
+            {/* {routes.map((route) => (
+              <Route key={route.path} {...route} />
+            ))}
+             */}
 
           </Switch>
         </Suspense>
