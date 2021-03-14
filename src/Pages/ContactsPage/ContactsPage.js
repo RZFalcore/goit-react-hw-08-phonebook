@@ -6,6 +6,7 @@ import Filter from "../../Components/Filter/Filter";
 import Title from "../../Components/Title/Title";
 import AddForm from "../../Components/AddForm/AddForm";
 import { contactsOperations } from "../../redux/contacts";
+import { authSelectors } from "../../redux/auth/";
 import styles from "./ContactsPage.module.css";
 
 class HomePage extends Component {
@@ -18,8 +19,19 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.replace("/login");
+      return;
+    }
     this.props.fetchContacts();
     this.setState({ animate: true });
+  }
+
+  componentDidUpdate() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.replace("/login");
+      return;
+    }
   }
 
   render() {
@@ -38,8 +50,12 @@ class HomePage extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => ({
+  isAuthenticated: authSelectors.userAuthenticatedSelector(state),
+});
+
 const mapDispatchToProps = {
   fetchContacts: contactsOperations.fetchContactsOperation,
 };
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
