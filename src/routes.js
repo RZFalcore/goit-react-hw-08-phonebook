@@ -23,7 +23,7 @@ const routes = [
     exact: true,
     private: false,
     restricted: true,
-    component: lazy(() => import("./Pages/ContactsPage/ContactsPage")),
+    component: lazy(() => import("./Pages/RegistrationPage/RegistationPage")),
   },
 ];
 

@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authOperations } from "../../redux/auth";
+import { authOperations, authSelectors } from "../../redux/auth";
 class RegistationPage extends Component {
   state = { name: "", email: "", password: "" };
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.replace("/contacts");
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isAuthenticated) {
+      this.props.history.replace("/contacts");
+    }
+  }
 
   handleInputChange = ({ target: { value, name } }) => {
     this.setState({ [name]: value });
@@ -62,9 +74,13 @@ class RegistationPage extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => ({
+  isAuthenticated: authSelectors.userAuthenticatedSelector(state),
+});
+
 
 const mapDispatchToProps = {
   onRegistration: authOperations.registration,
 };
 
-export default connect(null, mapDispatchToProps)(RegistationPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistationPage);
