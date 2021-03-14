@@ -30,7 +30,7 @@ const Header = ({ isAuthenticated, isDataLoaded }) => (
         Log In
       </NavLink>
     </ul>
-    {isAuthenticated &&  isDataLoaded  && <UserMenu />}
+    {isDataLoaded && <UserMenu />}
   </div>
 );
 

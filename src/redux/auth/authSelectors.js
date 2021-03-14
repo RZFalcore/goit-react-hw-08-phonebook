@@ -2,4 +2,6 @@
 const userNameSelector = (state) => state.auth.user.name;
 const userAuthenticatedSelector = (state) => state.auth.token;
 
-export default { userNameSelector, userAuthenticatedSelector };
+const authSelectors = { userNameSelector, userAuthenticatedSelector };
+
+export default authSelectors;

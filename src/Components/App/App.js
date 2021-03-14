@@ -3,11 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Header from "../Header/Header";
+import { authOperations } from "../../redux/auth";
+import routes from "../../routes";
 // import ContactsPage from "../../Pages/ContactsPage/ContactsPage";
 // import LoginPage from "../../Pages/LoginPage/LoginPage";
 // import RegistationPage from "../../Pages/RegistrationPage/RegistationPage";
-import { authOperations } from "../../redux/auth";
-import routes from "../../routes";
 
 class App extends Component {
   componentDidMount() {
@@ -24,9 +24,11 @@ class App extends Component {
             {routes.map((route) => (
               <Route key={route.path} {...route} />
             ))}
+            
             {/* <Route exact path="/contacts" component={ContactsPage} />
             <Route path="/registration" component={RegistationPage} />
-            <Route path="/login" component={LoginPage} /> */}
+            <Route path="/login" component={LoginPage} />  */}
+
           </Switch>
         </Suspense>
       </>

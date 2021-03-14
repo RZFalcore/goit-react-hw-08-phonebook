@@ -38,8 +38,10 @@ const removeContactOperation = (id) => (dispatch) => {
     .catch((err) => dispatch(contactsActions.removeContactError(err)));
 };
 
-export default {
+const contactsOperations = {
   fetchContactsOperation,
   addContactOperation,
   removeContactOperation,
 };
+
+export default contactsOperations;
