@@ -21,7 +21,7 @@ const registration = (credentials) => (dispatch) => {
       token.set(res.data.token);
       dispatch(authActions.registerSuccess(res.data));
     })
-    .catch((err) => dispatch(authActions.registerError(err)));
+    .catch((err) => dispatch(authActions.registerError(err.message)));
 };
 
 const login = (credentials) => (dispatch) => {
@@ -33,7 +33,7 @@ const login = (credentials) => (dispatch) => {
       token.set(res.data.token);
       dispatch(authActions.loginSuccess(res.data));
     })
-    .catch((err) => dispatch(authActions.loginError(err)));
+    .catch((err) => dispatch(authActions.loginError(err.message)));
 };
 
 const logout = () => (dispatch) => {
@@ -42,11 +42,10 @@ const logout = () => (dispatch) => {
   axios
     .post("/users/logout")
     .then((res) => {
-      console.log(res);
       token.unset();
       dispatch(authActions.logoutSuccess());
     })
-    .catch((err) => dispatch(authActions.logoutError(err)));
+    .catch((err) => dispatch(authActions.logoutError(err.message)));
 };
 
 const getCurrentUser = () => (dispatch, getState) => {
@@ -64,7 +63,7 @@ const getCurrentUser = () => (dispatch, getState) => {
   axios
     .get("/users/current")
     .then((res) => dispatch(authActions.getCurrentUserSuccess(res.data)))
-    .catch((err) => dispatch(authActions.getCurrentUserError(err)));
+    .catch((err) => dispatch(authActions.getCurrentUserError(err.message)));
 };
 
 const authOperations = { registration, login, logout, getCurrentUser, token };
