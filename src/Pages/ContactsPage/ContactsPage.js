@@ -7,7 +7,6 @@ import Title from "../../Components/Title/Title";
 import AddForm from "../../Components/AddForm/AddForm";
 import { contactsOperations } from "../../redux/contacts";
 import { authSelectors } from "../../redux/auth/";
-import styles from "./ContactsPage.module.css";
 
 class HomePage extends Component {
   static propTypes = {
@@ -26,7 +25,7 @@ class HomePage extends Component {
   render() {
     const { animate } = this.state;
     return (
-      <div className={styles.container}>
+      <>
         <Title text="Phonebook">
           <AddForm />
         </Title>
@@ -34,7 +33,7 @@ class HomePage extends Component {
           <Filter />
           <Contacts animate={animate} />
         </Title>
-      </div>
+      </>
     );
   }
 }

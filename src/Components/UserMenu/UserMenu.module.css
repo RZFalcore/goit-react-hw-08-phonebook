@@ -1,0 +1,35 @@
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.userName {
+    padding: 0px;
+    margin: 0px 10px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.logOutBtn {
+    padding: 0 10px;
+    border: 0px;
+    height: 100%;
+    background-color: darkblue;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+}
+
+.logOutBtn:hover,
+:active {
+    background-color: rgb(56, 59, 241);
+    color: white;
+}

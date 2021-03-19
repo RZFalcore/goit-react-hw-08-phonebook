@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from "react";
-import { Switch } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Header from "../Header/Header";
@@ -27,6 +27,7 @@ class App extends Component {
                 <PublicRoute key={route.label} {...route} />
               )
             )}
+            <Redirect to="/contacts" />
           </Switch>
         </Suspense>
       </>

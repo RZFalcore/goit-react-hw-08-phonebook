@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authSelectors, authOperations } from "../../redux/auth";
+import styles from "./UserMenu.module.css";
 
 const UserMenu = ({ name, onLogout }) => (
-  <div style={{ display: "flex" }}>
-    <img src="" alt="" />
-    <p>{name}</p>
-    <button onClick={onLogout}>Log Out</button>
+  <div className={styles.wrap}>
+    <p className={styles.userName}>{name}</p>
+    <button className={styles.logOutBtn} onClick={onLogout}>
+      Log Out
+    </button>
   </div>
 );
 

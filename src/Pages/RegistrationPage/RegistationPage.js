@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authOperations, authSelectors } from "../../redux/auth";
+import Title from "../../Components/Title/Title";
 class RegistationPage extends Component {
   state = { name: "", email: "", password: "" };
 
@@ -30,46 +31,47 @@ class RegistationPage extends Component {
     const { name, email, password } = this.state;
     return (
       <>
-        <h1>Registration</h1>
-        <form
-          onSubmit={this.handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "70%",
-            justifyContent: "center",
-            alignItems: "start",
-          }}
-        >
-          <label>
-            Name
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <button type="submit">Register</button>
-        </form>
+        <Title text="Registration">
+          <form
+            onSubmit={this.handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "70%",
+              justifyContent: "center",
+              alignItems: "start",
+            }}
+          >
+            <label>
+              Name
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={this.handleInputChange}
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleInputChange}
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleInputChange}
+              />
+            </label>
+            <button type="submit">Register</button>
+          </form>
+        </Title>
       </>
     );
   }
@@ -77,7 +79,6 @@ class RegistationPage extends Component {
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: authSelectors.userAuthenticatedSelector(state),
 });
-
 
 const mapDispatchToProps = {
   onRegistration: authOperations.registration,

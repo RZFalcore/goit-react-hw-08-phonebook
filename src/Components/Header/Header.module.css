@@ -1,14 +1,36 @@
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(69, 195, 253);
+}
+
+.list {
+    padding: 0px;
+    margin: 0px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+
+.listItem {
+    padding: 0px;
+    margin: 0px;
+}
+
 .link {
     text-transform: uppercase;
     text-decoration: none;
     margin-left: 10px;
 }
 
-.link:hover,
+.listItem:hover,
 :focus {
-    color: blueviolet;
+    color: white;
+
 }
 
 .activeLink {
-    color: blue
+    color: white;
 }
