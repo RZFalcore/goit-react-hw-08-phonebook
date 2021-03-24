@@ -10,7 +10,6 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// import thunk from "redux-thunk";
 import contactsReducer from "./contacts/contactsReducers";
 import authReducer from "./auth/authReducers";
 
@@ -29,7 +28,6 @@ const store = configureStore({
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  // middleware: [thunk],
 });
 
 export const persistor = persistStore(store);

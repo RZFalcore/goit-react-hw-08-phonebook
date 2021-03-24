@@ -28,8 +28,7 @@
     color: white;
 }
 
-.logOutBtn:hover,
-:active {
+.logOutBtn:hover {
     background-color: rgb(56, 59, 241);
     color: white;
 }
